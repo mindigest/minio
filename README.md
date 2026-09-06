@@ -1,3 +1,34 @@
+> ## This is a fork
+>
+> **[mindigest/minio](https://github.com/mindigest/minio)** — upstream `minio/minio` at
+> **`RELEASE.2025-10-15T17-29-55Z`** with exactly one change: `github.com/minio/console`
+> is pinned back to **v1.7.6**, the last release carrying the **full web console**.
+>
+> Upstream moved the console to a stripped-down "object-browser" line: `RELEASE.2025-05-24`
+> switched to pre-release pseudo-versions and `RELEASE.2025-09-06` onwards ships
+> object-browser v2.x. `RELEASE.2025-04-22T22-12-26Z` was the last release with the full
+> console — but it also predates two P0 fixes (background self-healing was disabled on every
+> erasure deployment; session policies were bypassed on "own account" admin operations).
+> This fork exists so you do not have to choose between the two.
+>
+> **Use the image, not the instructions below:**
+>
+> ```
+> docker pull mindigest/minio:RELEASE.2025-10-15T17-29-55Z.hotfix.8aca00d9f
+> ```
+>
+> **To build:** `buildscripts/build-fork.sh`. Do **not** use `make build`, `make hotfix`,
+> `make docker`, or the `go install github.com/minio/minio@latest` command in the upstream
+> README below — the first three are broken or mis-targeted for this tree, and the last one
+> builds *upstream*, giving you the stripped console this fork exists to avoid.
+>
+> See **[FORK.md](FORK.md)** for the rationale, the build/release procedure, and how to
+> rebase onto a newer upstream release without silently losing the pin.
+>
+> Everything below this line is upstream's README, kept verbatim.
+
+---
+
 # MinIO Quickstart Guide
 
 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/minio/minio/blob/master/LICENSE)

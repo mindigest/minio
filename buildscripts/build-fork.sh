@@ -47,6 +47,22 @@ if [ -z "${GOTOOLCHAIN:-}" ]; then
 fi
 export GOTOOLCHAIN
 
+# The entire reason this fork exists. A rebase onto a newer upstream release
+# conflicts on this go.mod line, and resolving it "take theirs" -- the natural
+# instinct on a dependency bump -- silently restores the stripped
+# object-browser console. Refuse to build rather than ship that by accident.
+CONSOLE_PIN=${CONSOLE_PIN:-v1.7.6}
+CONSOLE_ACTUAL=$(go list -m -f '{{.Version}}' github.com/minio/console)
+if [ "$CONSOLE_ACTUAL" != "$CONSOLE_PIN" ]; then
+	cat >&2 <<-EOF
+	FATAL: github.com/minio/console is ${CONSOLE_ACTUAL}, expected ${CONSOLE_PIN}.
+	       This fork exists to ship the full web console; anything newer is the
+	       stripped object-browser. If you just rebased onto a newer upstream
+	       release, keep v1.7.6 on the go.mod conflict. See FORK.md.
+	EOF
+	exit 1
+fi
+
 BASE_TAG=$(git describe --tags --abbrev=0)
 SHA=$(git rev-parse --short HEAD)
 COMMIT_DATE=$(git log -1 --format=%cI)
