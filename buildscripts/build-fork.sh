@@ -63,7 +63,11 @@ if [ "$CONSOLE_ACTUAL" != "$CONSOLE_PIN" ]; then
 	exit 1
 fi
 
-BASE_TAG=$(git describe --tags --abbrev=0)
+# Find the nearest UPSTREAM release tag. Plain `git describe --tags --abbrev=0`
+# would return this script's own RELEASE.<base>.hotfix.<sha> release tag once
+# one exists, which is not a parseable upstream version -- the script would
+# then fail on its own previous release.
+BASE_TAG=$(git describe --tags --abbrev=0 --match 'RELEASE.*Z' --exclude '*hotfix*')
 SHA=$(git rev-parse --short HEAD)
 COMMIT_DATE=$(git log -1 --format=%cI)
 
