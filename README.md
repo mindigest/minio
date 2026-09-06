@@ -23,7 +23,8 @@
 > builds *upstream*, giving you the stripped console this fork exists to avoid.
 >
 > See **[FORK.md](FORK.md)** for the rationale, the build/release procedure, and how to
-> rebase onto a newer upstream release without silently losing the pin.
+> rebase onto a newer upstream release without silently losing the pin, and
+> **[docs/OPERATIONS.md](docs/OPERATIONS.md)** for build / run / inspect / upgrade commands.
 >
 > Everything below this line is upstream's README, kept verbatim.
 

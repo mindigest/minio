@@ -57,7 +57,8 @@ buildscripts/build-fork.sh
 ```
 
 That is the only supported path. It cross-compiles the Linux binary with correct version
-stamping and builds the container image.
+stamping and builds the container image. Full command reference, including running and
+upgrading, is in [docs/OPERATIONS.md](docs/OPERATIONS.md).
 
 ```sh
 PLATFORM=linux/arm64 buildscripts/build-fork.sh    # different target
